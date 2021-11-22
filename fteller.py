@@ -4,7 +4,7 @@ import requests
 def f(prompt, name):
     headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer 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',
+    'Authorization': 'Bearer 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',
     }
     data = '{\n  "prompt": "' + prompt + '",\n  "max_tokens": 100\n}'
     response = requests.post('https://api.openai.com/v1/engines/davinci/completions', headers=headers, data=data)
