@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 from datetime import datetime
+import logging
 
 default_max_tokens=100
 default_temperature=0.9
@@ -34,9 +35,9 @@ def f(prompt,
         st.header(name + "!")
     else:
         name = 'guest'
-    response_text = response.json()['choices'][0]['text'].replace("\n", "")
+    response_text = response.json()['choices'][0]['text'].replace("\n", " ")
     st.subheader(response_text)
-    print(f"{datetime.now()},{name},{response_text}")
+    logging.info(f"{name},{response_text}")
 
 
 advanced = st.sidebar.checkbox("Advanced settings", False)
@@ -47,8 +48,8 @@ name = st.text_input("How do they call you?")
 
 if advanced:
     prompt = st.text_input("Write anything here, I will continue", "Once upon a time, ")
-    max_tokens = st.slider("Answer length", 1, 100, default_max_tokens, 1)
     temprerature = st.slider("temperature (higher the temperature = crazyer fortune)", 0.0, 1.0, default_temperature, 0.01)
+    max_tokens = st.slider("max_tokens", 1, 100, default_max_tokens, 1)
     top_p=st.slider("top_p", 0.0, 1.0, default_top_p, 0.01)
     presence_penalty=st.slider("presence_penalty", -2.0, 2.0, default_presence_penalty, 0.01)
     frequency_penalty=st.slider("frequency_penalty", -2.0, 2.0, default_frequency_penalty, 0.01)
