@@ -37,7 +37,7 @@ def f(prompt,
         name = 'guest'
     response_text = response.json()['choices'][0]['text'].replace("\n", " ")
     st.subheader(response_text)
-    logging.info(f"{name},{response_text}")
+    logging.error(f"{name},{response_text}")
 
 
 advanced = st.sidebar.checkbox("Advanced settings", False)
